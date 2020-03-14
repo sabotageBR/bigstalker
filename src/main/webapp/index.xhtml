@@ -12,7 +12,18 @@
 
 <h:body>
     <p:outputPanel style="display:block">
-        <h3 style="text-align: center">#{sampleBean.message}</h3>
+        <h3 style="text-align: center">
+	        <a href="#{loginController.to.urlInstagram}">
+	        	<img src="http://jinstagram-sachinhandiekar.rhcloud.com/BasicWebDemo/images/Instagram_normal.png" />
+	        </a>
+	        
+        </h3>
+        <ui:fragment rendered="#{loginController.to.token ne null and loginController.to.token ne ''}">
+	        <h3 style="text-align: center">
+		        LOGADO CODE: #{loginController.to.token}
+		        
+	        </h3>
+	     </ui:fragment>   
     </p:outputPanel>
 </h:body>
 </html>
