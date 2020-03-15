@@ -1,9 +1,8 @@
 package com.bigstalker.controller;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.jinstagram.Instagram;
 import org.jinstagram.auth.InstagramAuthService;
@@ -14,8 +13,7 @@ import org.jinstagram.auth.oauth.InstagramService;
 import com.bigstalker.session.CustomIdentity;
 import com.bigstalker.to.LoginTO;
 
-@Named
-@RequestScoped
+@Model
 public class LoginController extends AbstractController<LoginTO>{
 
 	
@@ -44,6 +42,7 @@ public class LoginController extends AbstractController<LoginTO>{
 			}
 		}catch(Exception e) {
 		}	
+		
 	}
 	
 	private void initProperties(){
@@ -54,7 +53,6 @@ public class LoginController extends AbstractController<LoginTO>{
 	            .scope("basic")
 	            .build();
 	    customIdentity.setService(service);
-
 	    getTo().setUrlInstagram(service.getAuthorizationUrl());
 	}
 	
