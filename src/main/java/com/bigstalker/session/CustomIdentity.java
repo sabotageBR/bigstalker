@@ -3,10 +3,12 @@ package com.bigstalker.session;
 import java.io.Serializable;
 
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Named;
 
 import org.jinstagram.Instagram;
 import org.jinstagram.auth.oauth.InstagramService;
 
+@Named
 @SessionScoped
 public class CustomIdentity implements Serializable {
 

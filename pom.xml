@@ -18,9 +18,9 @@
         <junit-jupiter.version>5.5.0</junit-jupiter.version>
         <all-themes.version>1.0.10</all-themes.version>
         <primefaces.version>7.0</primefaces.version>
-        <omnifaces.version>3.3</omnifaces.version>
+        <omnifaces.version>3.4.1</omnifaces.version>
         <microprofile.version>3.0</microprofile.version>
-        <javaee-api.version>8.0</javaee-api.version>
+        <javaee-api.version>8.0.1</javaee-api.version>
     </properties>
 
     <repositories>
