@@ -21,7 +21,6 @@ public class HttpSecurityConfiguration {
 //			.forPath("/pages/public/*").unprotected()
 //		    .forPath("/logout").logout().redirectTo("/index");
 		
-		
 		builder.http().allPaths().unprotected();
 				
 	}
