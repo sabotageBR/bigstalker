@@ -30,6 +30,9 @@ public class Publicacao {
 	
 	private String texto;
 	
+	@Column(name="duracao_video")
+	private Double duracaoVideo;
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_add")
 	private Date dataAdd;
@@ -121,6 +124,14 @@ public class Publicacao {
 
 	public void setDataPublicacao(Date dataPublicacao) {
 		this.dataPublicacao = dataPublicacao;
+	}
+
+	public Double getDuracaoVideo() {
+		return duracaoVideo;
+	}
+
+	public void setDuracaoVideo(Double duracaoVideo) {
+		this.duracaoVideo = duracaoVideo;
 	}
 	
 }

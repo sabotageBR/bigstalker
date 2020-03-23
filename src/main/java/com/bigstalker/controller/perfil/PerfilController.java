@@ -28,7 +28,9 @@ public class PerfilController extends AbstractController<PerfilTO> {
 	
 	
 	public void pesquisar() {
-		getTo().setPerfis(perfilService.pesquisarPorTermo(getTo().getPerfilPesquisa().getNome()));
+		if(getTo().getPerfilPesquisa().getNome() != null && !getTo().getPerfilPesquisa().getNome().equals("") && getTo().getPerfilPesquisa().getNome().length() > 2) {
+			getTo().setPerfis(perfilService.pesquisarPorTermo(getTo().getPerfilPesquisa().getNome()));
+		}	
 	}
 	
 }

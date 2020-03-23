@@ -44,19 +44,27 @@
 									</h:outputText>
 								</p>
 							</div>
-							<div class="single-slider owl-carousel owl-no-dots bottom-0">
+							<div class="single-slider owl-carousel owl-loaded owl-drag">
 								<ui:repeat var="imagem" value="#{publicacao.imagens}">	
-									<ui:fragment rendered="#{!imagem.url.contains('480x480')}">				
+									<ui:fragment rendered="#{imagem.url.contains('jpg') and !imagem.url.contains('480x480')}">				
 										<div class="caption shadow-large bottom-0">
-											<img class="caption-image owl-lazy"
-												data-src="#{imagem.url}" />
+											<a href="#{imagem.url}" target="blank">
+												<img class="caption-image owl-lazy"
+													data-src="#{imagem.url}" />
+											</a>		
 										</div>
 									</ui:fragment>	
+									<ui:fragment rendered="#{imagem.url.contains('mp4')}">				
+										<div class="caption shadow-large bottom-0">
+											<video width="320" height="240" controls="controls">
+											  <source src="#{imagem.url}" type="video/mp4" />
+											</video>
+										</div>
+									</ui:fragment>
 								</ui:repeat>	
 							</div>
 						</div>
 						<div class="divider divider-margins"></div>
-						
 				</ui:repeat>
 				</div>
 			</div>

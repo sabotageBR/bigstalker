@@ -75,6 +75,9 @@ public class InstagramService {
 		Publicacao publicacao = publicacaoService.recuperarPorPostIdPerfil(String.valueOf(feedResult.getPk()), perfil);
 		if(publicacao == null) {
 		    System.out.println("Privado:"+userResultFriend.getUser().is_private()+" login:"+userResultFriend.getUser().getUsername()+" Post ID: " + feedResult);
+		    if(userResultFriend.getUser().getUsername().equals("melissamelmaia")) {
+		    	System.out.println("break");
+		    }
 		    publicacao = new Publicacao();
 		    publicacao.setPostid(String.valueOf(feedResult.getPk()));
 		    publicacao.setPerfil(perfil);
@@ -83,23 +86,35 @@ public class InstagramService {
 		    }	
 		    publicacao.setDataAdd(new Date());
 		    publicacao.setDataPublicacao(new Date(feedResult.getDevice_timestamp()));
+		    publicacao.setDuracaoVideo(feedResult.getVideo_duration());
 		    publicacaoService.incluir(publicacao);
-		    if(feedResult.getImage_versions2() != null) {
-		    	if(feedResult.getImage_versions2().getCandidates() != null) {
-		    		for(ImageMeta imagemInsta:feedResult.getImage_versions2().getCandidates()) {
+		    if(feedResult.getVideo_duration() > 0) {
+		    	System.out.println("PARAR");
+		    }
+		    if(feedResult.getVideo_duration() == 0) {
+			    if(feedResult.getImage_versions2() != null) {
+			    	if(feedResult.getImage_versions2().getCandidates() != null) {
+			    		for(ImageMeta imagemInsta:feedResult.getImage_versions2().getCandidates()) {
+			    			gravarImagem(publicacao, imagemInsta);
+			    		}
+			    	}
+			    }
+			    if(feedResult.getCarousel_media() != null) {
+			    	for(InstagramCarouselMediaItem mediaItem:feedResult.getCarousel_media()) {
+			    		if(mediaItem.getImage_versions2() != null && mediaItem.getImage_versions2().getCandidates() != null) {
+			    			for(ImageMeta imagemInsta:mediaItem.getImage_versions2().getCandidates()) {
+			    				gravarImagem(publicacao, imagemInsta);
+			    			}
+			    		}	
+			    	}
+			    }
+		    }else {    
+		    	if(feedResult.getVideo_versions() != null) {
+		    		for(ImageMeta imagemInsta:feedResult.getVideo_versions()) {
 		    			gravarImagem(publicacao, imagemInsta);
 		    		}
 		    	}
-		    }
-		    if(feedResult.getCarousel_media() != null) {
-		    	for(InstagramCarouselMediaItem mediaItem:feedResult.getCarousel_media()) {
-		    		if(mediaItem.getImage_versions2() != null && mediaItem.getImage_versions2().getCandidates() != null) {
-		    			for(ImageMeta imagemInsta:mediaItem.getImage_versions2().getCandidates()) {
-		    				gravarImagem(publicacao, imagemInsta);
-		    			}
-		    		}	
-		    	}
-		    }
+		    }	
 		}
 	}
 
