@@ -10,6 +10,7 @@ public class PerfilTO {
 	private Perfil perfil;
 	private Perfil perfilPesquisa;	
 	private List<Perfil> perfis;
+	private Integer voto;
 
 	public Perfil getPerfil() {
 		if (perfil == null) {
@@ -43,6 +44,14 @@ public class PerfilTO {
 
 	public void setPerfilPesquisa(Perfil perfilPesquisa) {
 		this.perfilPesquisa = perfilPesquisa;
+	}
+
+	public Integer getVoto() {
+		return voto;
+	}
+
+	public void setVoto(Integer voto) {
+		this.voto = voto;
 	}
 	
 	

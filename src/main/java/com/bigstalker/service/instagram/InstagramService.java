@@ -22,6 +22,7 @@ import org.brunocvcunha.instagram4j.requests.payload.InstagramUserSummary;
 import com.bigstalker.entity.Perfil;
 import com.bigstalker.entity.Publicacao;
 import com.bigstalker.entity.PublicacaoImagem;
+import com.bigstalker.entity.Usuario;
 import com.bigstalker.service.perfil.PerfilService;
 import com.bigstalker.service.publicacao.PublicacaoService;
 import com.bigstalker.service.publicacaoimagem.PublicacaoImagemService;
@@ -34,7 +35,7 @@ public class InstagramService {
 	private @Inject PublicacaoImagemService publicacaoImagemService;
 	
 	@Asynchronous
-	public void syncInstagram(Instagram4j instagram, String usuario)throws Exception{
+	public void syncInstagram(Instagram4j instagram, String usuario, Usuario usuarioLiberacao)throws Exception{
 		try{
 			InstagramSearchUsernameResult userResult = instagram.sendRequest(new InstagramSearchUsernameRequest(usuario));
 			System.out.println("ID for @github is " + userResult.getUser().getPk());
@@ -50,7 +51,7 @@ public class InstagramService {
 			    System.out.println(i+" User " + user.getUsername()+" Privado:"+user.is_private());
 			    try {
 				    userResultFriend = instagram.sendRequest(new InstagramSearchUsernameRequest(user.getUsername()));
-				    Perfil perfil = gravarPerfil(userResultFriend);
+				    Perfil perfil = gravarPerfil(userResultFriend,usuarioLiberacao);
 				    feedFriend = instagram.sendRequest(new InstagramUserFeedRequest(userResultFriend.getUser().getPk()));
 				    if(feedFriend.getItems() != null && feedFriend.getItems().size() > 0) {
 					    for (InstagramFeedItem feedResult : feedFriend.getItems()) {
@@ -127,7 +128,7 @@ public class InstagramService {
 	}
 
 
-	private Perfil gravarPerfil(InstagramSearchUsernameResult userResultFriend) {
+	private Perfil gravarPerfil(InstagramSearchUsernameResult userResultFriend,Usuario usuarioLiberacao) {
 		Perfil perfil = perfilService.recuperarPorUsuario(userResultFriend.getUser().getUsername());
 		if(perfil == null) {
 			perfil = new Perfil();
@@ -140,6 +141,7 @@ public class InstagramService {
 			perfil.setNotaMedia(Double.valueOf(0));
 			perfil.setNotaTotal(Double.valueOf(0));			
 			perfil.setQtdVoto(0);
+			perfil.setUsuarioLiberacao(usuarioLiberacao);
 			perfilService.incluir(perfil);
 		}else {
 			perfil.setNome(userResultFriend.getUser().getFull_name());

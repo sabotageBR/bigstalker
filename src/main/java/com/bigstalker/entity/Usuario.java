@@ -1,11 +1,16 @@
 package com.bigstalker.entity;
 
+import java.util.Date;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name = "bst_usuario", schema = "public")
@@ -19,6 +24,10 @@ public class Usuario {
 	private String senha;
 	private String nome;
 	private String imagem;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="data_ultimo_login")
+	private Date dataUltimoLogin;
 	
 	public String getNome() {
 		return nome;
@@ -49,6 +58,12 @@ public class Usuario {
 	}
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+	public Date getDataUltimoLogin() {
+		return dataUltimoLogin;
+	}
+	public void setDataUltimoLogin(Date dataUltimoLogin) {
+		this.dataUltimoLogin = dataUltimoLogin;
 	}
 	
 }

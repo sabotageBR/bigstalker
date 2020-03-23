@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -39,6 +41,10 @@ public class Perfil {
 	
 	@OneToMany(mappedBy = "perfil")
 	private List<Publicacao> publicacoes;
+	
+	@ManyToOne
+	@JoinColumn(name="id_usuario_liberacao")
+	private Usuario usuarioLiberacao;
 
 	public Integer getId() {
 		return id;
@@ -134,6 +140,14 @@ public class Perfil {
 
 	public void setBiografia(String biografia) {
 		this.biografia = biografia;
+	}
+
+	public Usuario getUsuarioLiberacao() {
+		return usuarioLiberacao;
+	}
+
+	public void setUsuarioLiberacao(Usuario usuarioLiberacao) {
+		this.usuarioLiberacao = usuarioLiberacao;
 	}
 	 
 }

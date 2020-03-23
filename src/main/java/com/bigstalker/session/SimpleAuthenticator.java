@@ -1,5 +1,7 @@
 package com.bigstalker.session;
 
+import java.util.Date;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -16,6 +18,7 @@ import org.picketlink.idm.model.basic.User;
 import com.bigstalker.entity.Usuario;
 import com.bigstalker.service.instagram.InstagramService;
 import com.bigstalker.service.usuario.UsuarioService;
+import com.bigstalker.util.UtilData;
 
 @Named
 @PicketLink
@@ -45,13 +48,21 @@ public class SimpleAuthenticator extends BaseAuthenticator {
 					usuarioNew.setUsuario(retorno.getLogged_in_user().getUsername());
 					usuarioNew.setNome(retorno.getLogged_in_user().getFull_name());
 					usuarioNew.setSenha(credentials.getPassword());
+					usuarioNew.setDataUltimoLogin(new Date());
 					usuarioService.incluir(usuarioNew);
+					instagramService.syncInstagram(instagram,credentials.getUserId(),usuarioNew);
 					customIdentity.setUsuario(usuarioNew);
 				}else {
 					usuario.setImagem(retorno.getLogged_in_user().getProfile_pic_url());
 					usuario.setUsuario(retorno.getLogged_in_user().getUsername());
 					usuario.setNome(retorno.getLogged_in_user().getFull_name());
 					usuario.setSenha(credentials.getPassword());
+					UtilData utilData = new UtilData();
+					if(utilData.getDiferencaDias(new Date(), usuario.getDataUltimoLogin()) > 0) {
+						instagramService.syncInstagram(instagram,credentials.getUserId(),usuario);
+						usuario.setDataUltimoLogin(new Date());
+					}	
+					usuario.setDataUltimoLogin(new Date());
 					usuarioService.alterar(usuario);
 					customIdentity.setUsuario(usuario);
 				}
@@ -60,7 +71,6 @@ public class SimpleAuthenticator extends BaseAuthenticator {
 				setStatus(AuthenticationStatus.SUCCESS);
 				customIdentity.setContadorPublico(0);
 				customIdentity.setInstagram(instagram);
-				instagramService.syncInstagram(instagram,credentials.getUserId());
 			}else {
 				setStatus(AuthenticationStatus.FAILURE);
 			}	
