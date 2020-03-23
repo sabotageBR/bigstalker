@@ -8,6 +8,11 @@
 
 	<ui:param name="pagina" value="perfil" />
 	<ui:define name="corpo">
+		<ui:fragment rendered="#{customIdentity.contadorPublico > 2}">
+			<script>
+				location.href='#{request.contextPath}/limit';
+			</script>
+		</ui:fragment>
 
 		<div id="page" style="opacity: 1;">
 			<div id="page-preloader">

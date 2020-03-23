@@ -18,6 +18,7 @@ public class HttpSecurityConfiguration {
 	    	.forPath("/resources/*").unprotected()
 			.forPath("/home").unprotected()
 			.forPath("/perfil/*").unprotected()
+			.forPath("/limit").unprotected()
 			.forPath("/scripts/*").unprotected()
 			.forPath("/").unprotected()
 			.forPath("/index.xhtml").unprotected()

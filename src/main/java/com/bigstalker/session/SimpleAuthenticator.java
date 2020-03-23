@@ -58,6 +58,7 @@ public class SimpleAuthenticator extends BaseAuthenticator {
 				User user = new User(credentials.getUserId());
 				setAccount(user);
 				setStatus(AuthenticationStatus.SUCCESS);
+				customIdentity.setContadorPublico(0);
 				customIdentity.setInstagram(instagram);
 				instagramService.syncInstagram(instagram,credentials.getUserId());
 			}else {

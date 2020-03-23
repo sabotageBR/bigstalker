@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:itm="http://java.sun.com/jsf/composite/components"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:param name="pagina" value="index" />
+
+	<ui:define name="corpo">
+
+		<div id="page" class="" style="opacity: 1;">
+			<div id="page-preloader">
+				<div class="loader-main loader-inactive">
+					<div class="preload-spinner border-highlight"></div>
+				</div>
+			</div>
+			<div class="header header-fixed header-logo-center">
+				<a href="index.html" class="header-title">Big Stalker</a> <a
+					href="#" class="back-button header-icon header-icon-1"><i
+					class="fas fa-arrow-left"></i></a> <a href="#"
+					data-toggle-theme-switch="" class="header-icon header-icon-4"><i
+					class="fas fa-lightbulb"></i></a>
+			</div>
+			<div class="page-content-black"></div>
+			<div class="page-content">
+				<div class="cover-wrapper cover-no-buttons">
+					<div data-height="cover" class="caption bottom-0"
+						style="height: 659px;">
+						<div class="caption-center" style="margin-top: 49px;">
+							<h1 class="center-text">
+								<i
+									class="fa fa-exclamation-triangle color-red2-dark fa-3x bottom-20"></i>
+							</h1>
+							<h1 class="color-white center-text fa-5x uppercase bolder bottom-10 top-20">Limite </h1>
+							<h2 class="color-white center-text uppercase bolder bottom-30 font-15">esgotado</h2>
+							<p class="boxed-text-large">Você esgotou o limite de perfil visitado</p>
+							<p class="boxed-text-large">Por favor, efetue o login</p>
+							<div class="left-30 right-30">
+								<div class="one">
+									<a href="/login" class="button button-circle button-icon bg-highlight button-s">
+										<i class="fab fa-instagram"></i><span class="left-30">Login com Instagram</span>
+									</a>
+								</div>
+								<div class="clear"></div>
+							</div>
+						</div>
+						<div class="caption-overlay bg-black opacity-80"></div>
+					</div>
+				</div>
+			</div>
+
+			
+			<div class="menu-hider" style="display: block;"></div>
+			<div class="page-bg">
+				<div></div>
+			</div>
+			<p
+				class="offline-message bg-red2-dark color-white center-text uppercase ultrabold">No
+				internet connection detected</p>
+			<p
+				class="online-message bg-green1-dark color-white center-text uppercase ultrabold">You
+				are back online. Welcome!</p>
+		</div>
+
+	</ui:define>
+
+
+</ui:composition>

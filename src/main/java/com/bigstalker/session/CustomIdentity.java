@@ -17,6 +17,7 @@ public class CustomIdentity implements Serializable {
 
 	private Usuario usuario;
 	private Instagram4j instagram;
+	private Integer contadorPublico = 0;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -29,6 +30,12 @@ public class CustomIdentity implements Serializable {
 	}
 	public void setInstagram(Instagram4j instagram) {
 		this.instagram = instagram;
+	}
+	public Integer getContadorPublico() {
+		return contadorPublico;
+	}
+	public void setContadorPublico(Integer contadorPublico) {
+		this.contadorPublico = contadorPublico;
 	}
 	
 }
