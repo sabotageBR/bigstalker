@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:itm="http://java.sun.com/jsf/composite/components"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:param name="pagina" value="perfil" />
+	<ui:define name="corpo">
+
+		<div id="page" style="opacity: 1;">
+			<div id="page-preloader">
+				<div class="loader-main loader-inactive"><div class="preload-spinner border-highlight"></div></div>
+			</div>
+			<div class="header header-fixed header-logo-center">
+			<a href="#" class="header-title back-to-top">@#{perfilController.to.perfil.usuario}</a>
+			<a href="#" class="back-button header-icon header-icon-1"><i class="fas fa-arrow-left"></i></a>
+			<a href="#" data-toggle-theme-switch="" class="header-icon header-icon-4"><i class="fas fa-lightbulb"></i></a>
+			</div>
+			<div class="page-content header-clear-medium" style="padding-top: 0px;">
+				<div data-height="180"
+					class="caption caption-image caption-scale shadow-large"
+					style="height: 180px;">
+					<img src="#{perfilController.to.perfil.imagem}" data-src="#{perfilController.to.perfil.imagem}"
+						class="preload-image responsive-image" />
+<!-- 					<div class="caption-center right-15 top-15 text-right"> -->
+<!-- 						<a href="#" class="back-button button button-xs button-round-huge bg-highlight">#{resources['label.global.voltar']}</a> -->
+<!-- 					</div>	 -->
+					<div class="caption-center left-20">
+						<h1 class="color-white bolder top-10">#{perfilController.to.perfil.nome}</h1>
+						<p class="color-white under-heading bottom-10">@#{perfilController.to.perfil.usuario}</p>
+					</div>
+					<div class="caption-overlay bg-black opacity-70"></div>
+				</div>
+				<ui:repeat var="publicacao" value="#{perfilController.to.perfil.publicacoes}">
+					
+						<div class="content-boxed">
+							<div class="content">
+								<h4 class="bolder">#{publicacao.texto}</h4>
+								<p>
+									<h:outputText value="#{publicacao.dataPublicacao}">
+										<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+									</h:outputText>
+								</p>
+							</div>
+							<div class="single-slider owl-carousel owl-no-dots bottom-0">
+								<ui:repeat var="imagem" value="#{publicacao.imagens}">	
+									<ui:fragment rendered="#{!imagem.url.contains('480x480')}">				
+										<div class="caption shadow-large bottom-0">
+											<img class="caption-image owl-lazy"
+												data-src="#{imagem.url}" />
+										</div>
+									</ui:fragment>	
+								</ui:repeat>	
+							</div>
+						</div>
+						<div class="divider divider-margins"></div>
+						
+				</ui:repeat>
+				</div>
+			</div>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:itm="http://java.sun.com/jsf/composite/components"
+	template="/WEB-INF/templates/default.xhtml">
+
+	<ui:define name="corpo">
+
+		<h:form method="POST" prependId="false">
+			<div class="page-content header-clear-medium">
+				<div class="content-boxed left-40 right-40">
+					<div class="content top-10 bottom-20">
+						<h1 class="center-text uppercase ultrabold fa-3x">Big Stalker</h1>
+						<p
+							class="center-text font-11 under-heading bottom-30 color-highlight">
+							#{resources['label.global.entrelogininstagram']}</p>
+						<div class="input-style has-icon input-style-1 input-required">
+							<i class="input-icon fa fa-user font-11"></i> <span>#{resources['label.global.usuario']}</span>
+							<em>(required)</em> 
+							<h:inputText id="j_username"  required="true" label="#{resources['label.global.usuario']}" value="asgatasdebrasilia">
+								<f:passThroughAttribute name="required" value="required"  />
+							</h:inputText>
+						</div>
+						<div class="input-style has-icon input-style-1 input-required">
+							<i class="input-icon fa fa-lock font-11"></i> <span>#{resources['label.global.senha']}</span>
+							<em>(required)</em> 
+							<h:inputSecret id="j_password" required="true" label="#{resources['label.global.senha']}" redisplay="true" value="g34rtkm8">
+								<f:passThroughAttribute name="required" value="required"  />
+							</h:inputSecret>
+						</div>
+						<div class="clear"></div>
+						<div class="divider top-30"></div>
+							<h:commandLink id="login" action="#{identity.login}" 
+								styleClass="button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">
+								<i class="fab fa-instagram"></i><span class="left-30">#{resources['label.global.logincominstagram']}</span>
+							</h:commandLink>	
+						<div class="clear"></div>
+					</div>
+				</div>
+			</div>
+		</h:form>	
+
+
+	</ui:define>
+
+
+</ui:composition>

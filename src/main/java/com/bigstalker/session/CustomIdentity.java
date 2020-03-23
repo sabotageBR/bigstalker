@@ -5,43 +5,30 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import org.jinstagram.Instagram;
-import org.jinstagram.auth.oauth.InstagramService;
+import org.brunocvcunha.instagram4j.Instagram4j;
+
+import com.bigstalker.entity.Usuario;
 
 @Named
 @SessionScoped
 public class CustomIdentity implements Serializable {
 
 	private static final long serialVersionUID = 8606369819408324025L;
-	
-	private String code;
-	private InstagramService service;
-	private Instagram instagram;
-	
 
-	public String getCode() {
-		return code;
+	private Usuario usuario;
+	private Instagram4j instagram;
+
+	public Usuario getUsuario() {
+		return usuario;
 	}
-
-	public void setCode(String code) {
-		this.code = code;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
-
-	public InstagramService getService() {
-		return service;
-	}
-
-	public void setService(InstagramService service) {
-		this.service = service;
-	}
-
-	public Instagram getInstagram() {
+	public Instagram4j getInstagram() {
 		return instagram;
 	}
-
-	public void setInstagram(Instagram instagram) {
+	public void setInstagram(Instagram4j instagram) {
 		this.instagram = instagram;
 	}
-	
 	
 }

@@ -6,8 +6,204 @@
 	xmlns:itm="http://java.sun.com/jsf/composite/components"
 	template="/WEB-INF/templates/default.xhtml">
 
+	<ui:param name="pagina" value="index" />
+	
 	<ui:define name="corpo">
-		teste
+	
+		
+		<div class="page-content header-clear-small">
+			<div class="content-boxed">
+				<div class="footer">
+					<a href="#" class="footer-title"><span class="color-highlight">Big Stalker</span></a>
+					<p class="footer-text">
+						<span>#{resources['label.global.ogrande']}  <i
+							class="fa fa-user-secret color-highlight font-16 left-10 right-10"></i>
+							#{resources['label.global.espiao']}
+						</span><br />
+						<br />Desbloqueie e encontre perfis privados no Instagram.
+					</p>
+					<div class="footer-socials">
+						<ui:fragment rendered="#{!identity.loggedIn}">
+							<a href="${request.contextPath}/login" class="button button-circle button-icon bg-highlight button-s">
+								<i class="fab fa-instagram"></i><span class="left-30">#{resources['label.global.logincominstagram']}</span>
+							</a>
+						</ui:fragment>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="content-boxed">
+				<h1 class="center-text bolder">Os mais populares</h1>
+				<p
+					class="center-text opacity-70 under-heading color-highlight bottom-20 font-12">Os perfis privados mais acessados.</p>
+			</div>
+			<div class="double-slider owl-carousel owl-no-dots top-15">
+			
+				<ui:repeat var="perfilTopClick" value="#{indexController.to.perfisTopClick}">
+				<div>
+					<div class="caption round-medium shadow-huge bottom-15">
+						<div class="caption-bottom">
+							<h3 class="color-white center-text bolder bottom-0">#{perfilTopClick.nome}</h3>
+							<h4 class="color-white center-text bolder bottom-0">@#{perfilTopClick.usuario}</h4>
+							<div class="text-center bottom-20">
+								<ui:repeat var="estrela" value="#{perfilTopClick.listaEstrela}">
+									<i class="fa fa-star color-yellow1-dark"></i>
+								</ui:repeat> 
+							</div>
+							<a href="#{request.contextPath}/perfil/#{perfilTopClick.usuario}"
+								class="button button-full left-10 right-10 button-xxs button-round-large bg-highlight shadow-large bottom-10">#{resources['label.global.ver']}</a>
+						</div>
+						<div class="caption-overlay bg-gradient"></div>
+						<img class="caption-image owl-lazy"
+							data-src="#{perfilTopClick.imagem}" />
+					</div>
+				</div>
+				
+				</ui:repeat>
+				
+				
+			</div>
+			
+			
+			<div class="content-boxed">
+				<h1 class="center-text bolder">Os melhores avaliados</h1>
+				<p
+					class="center-text opacity-70 under-heading color-highlight bottom-20 font-12">Os perfis com as melhores avaliações.</p>
+			</div>
+			<div class="double-slider owl-carousel owl-no-dots top-15">
+			
+				<ui:repeat var="perfilTopClick" value="#{indexController.to.perfisTopNota}">
+				<div>
+					<div class="caption round-medium shadow-huge bottom-15">
+						<div class="caption-bottom">
+							<h3 class="color-white center-text bolder bottom-0">#{perfilTopClick.nome}</h3>
+							<div class="text-center bottom-20">
+								<ui:repeat var="estrela" value="#{perfilTopClick.listaEstrela}">
+									<i class="fa fa-star color-yellow1-dark"></i>
+								</ui:repeat> 
+							</div>
+							<a href="#"
+								class="button button-full left-10 right-10 button-xxs button-round-large bg-highlight shadow-large bottom-10">#{resources['label.global.ver']}</a>
+						</div>
+						<div class="caption-overlay bg-gradient"></div>
+						<img class="caption-image owl-lazy"
+							data-src="#{perfilTopClick.imagem}" />
+					</div>
+				</div>
+				
+				</ui:repeat>
+				
+				
+			</div>
+			
+			<div class="content-boxed">
+				<h1 class="center-text bolder">Care Quality</h1>
+				<p
+					class="center-text opacity-70 under-heading color-highlight bottom-20 font-12">No
+					stone left unturned, no aspect overlooked.</p>
+				<p class="center-text bottom-20">
+					<i class="fa fa-star color-yellow1-dark font-18 right-5"></i> <i
+						class="fa fa-star color-yellow1-dark font-18 right-5"></i> <i
+						class="fa fa-star color-yellow1-dark font-18"></i> <i
+						class="fa fa-star color-yellow1-dark font-18 left-5"></i> <i
+						class="fa fa-star color-yellow1-dark font-18 left-5"></i>
+				</p>
+				<div class="content">
+					<div class="single-slider owl-carousel owl-no-dots">
+						<div>
+							<p class="font-18 thin center-text line-height-huge bottom-15">
+								The code is always great with any Enabled template, but it's the
+								customer support that wins me over always.</p>
+						</div>
+						<div>
+							<p class="font-18 thin center-text line-height-huge bottom-15">
+								The best support I have ever had, it's so good I purchased
+								another template. Highlighy Recommended.</p>
+						</div>
+					</div>
+				</div>
+				<a href="#"
+					class="button button-m button-round-large button-center-medium shadow-huge bg-highlight bottom-30">More
+					Testimonials</a>
+			</div>
+			<div class="double-slider owl-carousel owl-no-dots">
+				<div>
+					<div data-height="180"
+						class="caption round-medium shadow-huge bottom-15">
+						<div class="caption-top">
+							<i class="fa fa-star fa-4x color-yellow1-dark left-15 top-15"></i>
+						</div>
+						<div class="caption-bottom">
+							<h2 class="color-white bolder bottom-0 left-10">Quality</h2>
+							<p class="color-white under-heading bottom-0 left-10 font-10">Built
+								with care and detail.</p>
+							<p />
+						</div>
+						<div class="caption-overlay bg-black opacity-80"></div>
+						<img class="caption-image owl-lazy"
+							data-src="#{request.contextPath}/resources/template/images/pictures/3t.jpg" />
+					</div>
+				</div>
+				<div>
+					<div data-height="180"
+						class="caption round-medium shadow-huge bottom-15">
+						<div class="caption-top">
+							<i class="fa fa-bolt fa-4x color-red2-dark left-15 top-15"></i>
+						</div>
+						<div class="caption-bottom">
+							<h2 class="color-white bolder bottom-0 left-10">Performance</h2>
+							<p class="color-white under-heading bottom-10 left-10 font-10">Fast
+								and feature filled.</p>
+						</div>
+						<div class="caption-overlay bg-black opacity-80"></div>
+						<img class="caption-image owl-lazy"
+							data-src="#{request.contextPath}/resources/template/images/pictures/18t.jpg" />
+					</div>
+				</div>
+				<div>
+					<div data-height="180"
+						class="caption round-medium shadow-huge bottom-15">
+						<div class="caption-top">
+							<i class="fa fa-trophy fa-4x color-blue2-dark left-15 top-15"></i>
+						</div>
+						<div class="caption-bottom">
+							<h2 class="color-white bolder bottom-0 left-10">Elite Care</h2>
+							<p class="color-white under-heading bottom-10 left-10 font-10">Built
+								by the Best for You!</p>
+						</div>
+						<div class="caption-overlay bg-black opacity-80"></div>
+						<img class="caption-image owl-lazy"
+							data-src="#{request.contextPath}/resources/template/images/pictures/13t.jpg" />
+					</div>
+				</div>
+			</div>
+			<div class="content-boxed">
+				<h1 class="center-text bolder">Get Sticky Today</h1>
+				<p
+					class="center-text opacity-70 under-heading bottom-20 font-12 color-highlight">Tons
+					of Awesome Features just for You.</p>
+				<div class="content center-text">
+					<p>Fast, easy to use and filled with features. Get Sticky Today
+						and give your site the Mobile Feeling it deserves.</p>
+				</div>
+				<a href="#"
+					class="button button-m button-round-large button-center-medium shadow-huge bg-highlight bottom-30">PURCHASE
+					NOW - $23</a>
+			</div>
+			<div class="content-boxed">
+				<div class="footer">
+					<p class="footer-copyright">
+						Big Stalker - Copyright Enabled <span id="copyright-year">2020</span>. All Rights Reserved.
+					</p>
+					<p class="footer-links">
+						<a href="#" class="color-highlight">Privacy Policy</a> | <a
+							href="#" class="color-highlight">Terms and Conditions</a> | <a
+							href="#" class="back-to-top color-highlight"> Back to Top</a>
+					</p>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
 	</ui:define>
 
 
