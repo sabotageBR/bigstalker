@@ -11,11 +11,13 @@ import com.bigstalker.dao.AbstractDAO;
 import com.bigstalker.dao.perfil.PerfilDAO;
 import com.bigstalker.entity.Perfil;
 import com.bigstalker.service.AbstractService;
+import com.bigstalker.service.notificacao.NotificacaoService;
 
 @Stateless
 public class PerfilService extends AbstractService<Perfil> {
 	
 	private @Inject PerfilDAO perfilDAO;
+	private @Inject NotificacaoService notificacaoService;
 
 	@Override
 	public AbstractDAO<Perfil> getDAO() {
@@ -31,6 +33,7 @@ public class PerfilService extends AbstractService<Perfil> {
 	@Override
 	public void incluir(Perfil entidade) {
 		super.incluir(entidade);
+		notificacaoService.notificarPerfilEncontrado(entidade);
 	}
 	
 	
@@ -55,6 +58,5 @@ public class PerfilService extends AbstractService<Perfil> {
 	public List<Perfil> pesquisarPorTermo(String termo) {
 		return perfilDAO.pesquisarPorTermo(termo);
 	}
-	
 
 }

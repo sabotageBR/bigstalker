@@ -1,5 +1,6 @@
 package com.bigstalker.service.instagram;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,7 @@ public class InstagramService {
 	private @Inject PerfilService perfilService;
 	private @Inject PublicacaoService publicacaoService;
 	private @Inject PublicacaoImagemService publicacaoImagemService;
+	
 	
 	@Asynchronous
 	public void syncInstagram(Instagram4j instagram, String usuario, Usuario usuarioLiberacao)throws Exception{
@@ -152,5 +154,34 @@ public class InstagramService {
 			perfilService.alterar(perfil);
 		}
 		return perfil;
+	}
+	
+	public List<InstagramUserSummary> encontrarEntreAmigos(Instagram4j instagram, String usuario, String usuarioLogado) {
+		List<InstagramUserSummary> perfisEncontrados = new ArrayList<InstagramUserSummary>();
+		try {
+			InstagramSearchUsernameResult usuarioLogadoInsta = instagram.sendRequest(new InstagramSearchUsernameRequest(usuarioLogado));
+			InstagramGetUserFollowersResult amigosUsuarioLogadoInsta = instagram.sendRequest(new InstagramGetUserFollowingRequest(usuarioLogadoInsta.getUser().getPk()));
+			
+			List<InstagramUserSummary> amigos = amigosUsuarioLogadoInsta.getUsers();
+			if(amigos != null) {
+				for (InstagramUserSummary amigo : amigos) {
+					InstagramGetUserFollowersResult amigosDosAmigos = instagram.sendRequest(new InstagramGetUserFollowingRequest(amigo.getPk()));
+					
+					if(amigosDosAmigos != null && amigosDosAmigos.getUsers() != null) {
+						for (InstagramUserSummary amigoDoAmigo : amigosDosAmigos.getUsers()) {
+							System.out.println("Amigo :"+amigo.getUsername()+" Amigo do Amigo:"+amigoDoAmigo.getUsername());
+							if(amigoDoAmigo.getUsername().equals(usuario)) {
+								perfisEncontrados.add(amigo);
+							}
+						}
+					}	
+				}
+			}	
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return perfisEncontrados;
+		
+		
 	}
 }

@@ -9,7 +9,7 @@
 	<ui:param name="pagina" value="perfil" />
 	
 	<ui:define name="corpo">
-		<h:form>
+		<h:form id="idFormPerfil">
 			<div class="page-content header-clear-small">
 				<div data-height="150" class="caption caption-margins round-medium"
 					style="height: 150px;">
@@ -38,9 +38,9 @@
 						</div>
 					</div>
 					<div style="margin: 15px 15px 30px;">
-						<h:commandLink action="#{perfilController.pesquisar}" styleClass="button button-m shadow-small button-round-small bg-green1-dark" value="#{resources['label.global.pesquisar']}" />
-					</div>	
-					<h:panelGroup id="idPainelResultado">
+						<h:commandButton id="idBotaoPesquisar" action="#{perfilController.pesquisar}" styleClass="button button-m shadow-small button-round-small bg-green1-dark" value="#{resources['label.global.pesquisar']}" />
+						
+						<h:panelGroup id="idPainelResultado">
 							<ui:fragment rendered="#{perfilController.to.perfilPesquisa.nome ne null and perfilController.to.perfilPesquisa.nome ne '' 
 																			and  perfilController.to.perfis.size() > 0}">
 								<div
@@ -55,6 +55,7 @@
 													class="search-result-list">
 													<img class="shadow-large" src="#{perfil.imagem}" alt="img" />
 													<h1>#{perfil.nome}</h1>
+													<h1>Privado: #{perfil.privado?resources['label.global.sim']:resources['label.global.nao']}</h1>
 													<h1>@#{perfil.usuario}</h1>
 													<p>#{perfil.biografia}</p>
 													<a href="#{request.contextPath}/perfil/#{perfil.usuario}" class="bg-highlight">#{resources['label.global.ver']}</a>
@@ -67,18 +68,36 @@
 							</ui:fragment>
 							<ui:fragment rendered="#{perfilController.to.perfilPesquisa.nome ne null and perfilController.to.perfilPesquisa.nome ne '' 
 																				and  perfilController.to.perfis.size() eq 0}">
-								<div class="search-results content-boxed shadow-large">
-										<div class="content">	
-											
-												<div class="search-no-results">
-													<h3 class="bold top-10">Não encontrado...</h3>
-													<span class="under-heading font-11 opacity-70 color-theme">Posso procurar entre seus amigos qual possui esse contato</span>
-												</div>
-												
-										</div>
-								</div>		
+																				
+																				
+								<div class="content-boxed">
+									<h1 class="center-text bolder">Nenhum perfil encontrado!</h1>
+									<h4 class="center-text bolder color-highlight">Criar um alerta quando desbloquear @#{perfilController.to.perfilPesquisa.nome}</h4>
+								</div>
 							</ui:fragment>
+						<div class="content-boxed" style="margin: 15px 15px 30px;#{(perfilController.to.perfilPesquisa.nome ne null and perfilController.to.perfilPesquisa.nome ne '' 
+																				and  perfilController.to.perfis.size() eq 0)?'':'display:none'}">
+							<div class="search search-header">
+								<i class="fa fa-search"></i> 
+								<h:inputText id="id_email_alerta"  label="#{resources['label.global.informeoemail']}" value="#{perfilController.to.notificacao.emailAlerta}">
+									<f:passThroughAttribute name="placeholder" value="#{resources['label.global.informeoemailreceberalerta']}"  />
+								</h:inputText>
+							</div>
+						</div>
+						<h:commandButton id="idBotaoCriarAlerta" action="#{perfilController.criarAlerta}"  value="#{resources['label.global.criaralerta']}"
+							style="margin: 15px 15px 30px;#{(perfilController.to.perfilPesquisa.nome ne null and perfilController.to.perfilPesquisa.nome ne '' 
+																				and  perfilController.to.perfis.size() eq 0)?'':'display:none'}"	
+						 	styleClass="button button-m shadow-small button-round-small bg-blue1-dark"/>
 					</h:panelGroup>	
+					
+					</div>
+					<ui:fragment rendered="#{perfilController.to.alertaCriado}">
+						<div class="content-boxed">
+							<h1 class="center-text bolder">#{resources['label.global.alertacriadosucesso']}</h1>
+							<h4 class="center-text bolder color-green3-dark">Você será notificado assim que o perfil for desbloqueado.</h4>
+						</div>	
+					</ui:fragment>	
+					
 <!-- 					<div class="search-trending content-boxed shadow-large"> -->
 <!-- 						<div class="content bottom-15"> -->
 <!-- 							<h5 class="bold">Trending Searches</h5> -->
@@ -132,7 +151,23 @@
 					</div>
 				</div>
 			</div>
+			
 		</h:form>
+		<script>
+			//<![CDATA[	
+				$(function(){
+					  $('#idFormPerfil').on('keypress', function(event){
+						  console.log('Entrou aqui');
+					    if(event.which === 13){
+					        event.preventDefault();
+					        console.log(document.getElementById('idFormPerfil:idBotaoPesquisar'));
+					        document.getElementById('idFormPerfil:idBotaoPesquisar').click();
+					    }
+					  });
+					});
+		 	//]]>
+		</script>
+		
 
 	</ui:define>
 

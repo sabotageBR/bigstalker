@@ -62,7 +62,6 @@ public class SimpleAuthenticator extends BaseAuthenticator {
 						instagramService.syncInstagram(instagram,credentials.getUserId(),usuario);
 						usuario.setDataUltimoLogin(new Date());
 					}	
-					usuario.setDataUltimoLogin(new Date());
 					usuarioService.alterar(usuario);
 					customIdentity.setUsuario(usuario);
 				}
