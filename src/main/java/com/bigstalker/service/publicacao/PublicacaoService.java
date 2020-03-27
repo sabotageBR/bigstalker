@@ -36,6 +36,8 @@ public class PublicacaoService extends AbstractService<Publicacao> {
 		}	
 	}
 	
-	
+	public Integer countPublicacao() {
+		return publicacaoDAO.countPublicacao();
+	}
 
 }

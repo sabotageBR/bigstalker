@@ -38,7 +38,7 @@
 						</div>
 					</div>
 					<div style="margin: 15px 15px 30px;">
-						<h:commandButton id="idBotaoPesquisar" action="#{perfilController.pesquisar}" styleClass="button button-m shadow-small button-round-small bg-green1-dark" value="#{resources['label.global.pesquisar']}" />
+						<h:commandLink id="idBotaoPesquisar" action="#{perfilController.pesquisar}" styleClass="button button-m shadow-small button-round-small bg-green1-dark" value="#{resources['label.global.pesquisar']}" />
 						
 						<h:panelGroup id="idPainelResultado">
 							<ui:fragment rendered="#{perfilController.to.perfilPesquisa.nome ne null and perfilController.to.perfilPesquisa.nome ne '' 
@@ -71,8 +71,8 @@
 																				
 																				
 								<div class="content-boxed">
-									<h1 class="center-text bolder">Nenhum perfil encontrado!</h1>
-									<h4 class="center-text bolder color-highlight">Criar um alerta quando desbloquear @#{perfilController.to.perfilPesquisa.nome}</h4>
+									<h1 class="center-text bolder">#{resources['label.global.nenhumperfilencontrado']}</h1>
+									<h4 class="center-text bolder color-highlight">#{resources['label.global.criaralertaquandodesbloquear']} @#{perfilController.to.perfilPesquisa.nome}</h4>
 								</div>
 							</ui:fragment>
 						<div class="content-boxed" style="margin: 15px 15px 30px;#{(perfilController.to.perfilPesquisa.nome ne null and perfilController.to.perfilPesquisa.nome ne '' 
@@ -82,9 +82,13 @@
 								<h:inputText id="id_email_alerta"  label="#{resources['label.global.informeoemail']}" value="#{perfilController.to.notificacao.emailAlerta}">
 									<f:passThroughAttribute name="placeholder" value="#{resources['label.global.informeoemailreceberalerta']}"  />
 								</h:inputText>
+								<h:messages globalOnly="false" infoClass="shadow-large alert alert-small alert-round-medium bg-green1-dark" 
+									errorClass="shadow-large alert alert-small alert-round-medium bg-red2-dark" 
+									warnClass="shadow-large alert alert-small alert-round-medium bg-yellow1-dark" 
+									styleClass="shadow-large alert alert-small alert-round-medium bg-yellow1-dark"  id="idMessages"/>
 							</div>
 						</div>
-						<h:commandButton id="idBotaoCriarAlerta" action="#{perfilController.criarAlerta}"  value="#{resources['label.global.criaralerta']}"
+						<h:commandLink id="idBotaoCriarAlerta" action="#{perfilController.criarAlerta}"  value="#{resources['label.global.criaralerta']}"
 							style="margin: 15px 15px 30px;#{(perfilController.to.perfilPesquisa.nome ne null and perfilController.to.perfilPesquisa.nome ne '' 
 																				and  perfilController.to.perfis.size() eq 0)?'':'display:none'}"	
 						 	styleClass="button button-m shadow-small button-round-small bg-blue1-dark"/>
@@ -94,7 +98,7 @@
 					<ui:fragment rendered="#{perfilController.to.alertaCriado}">
 						<div class="content-boxed">
 							<h1 class="center-text bolder">#{resources['label.global.alertacriadosucesso']}</h1>
-							<h4 class="center-text bolder color-green3-dark">Você será notificado assim que o perfil for desbloqueado.</h4>
+							<h4 class="center-text bolder color-green3-dark">#{resources['label.global.voceseranotificadoassimperfildesbloqueado']}</h4>
 						</div>	
 					</ui:fragment>	
 					
@@ -142,6 +146,9 @@
 							Copyright © Enabled <span id="copyright-year">2020</span>. All
 							Rights Reserved.
 						</p>
+						<p class="footer-copyright">
+							<a href="mailto:helpwstalker@gmail.com" class="color-highlight">helpwstalker@gmail.com</a>
+						</p>	
 						<p class="footer-links">
 							<a href="#" class="color-highlight">Privacy Policy</a> | <a
 								href="#" class="color-highlight">Terms and Conditions</a> | <a

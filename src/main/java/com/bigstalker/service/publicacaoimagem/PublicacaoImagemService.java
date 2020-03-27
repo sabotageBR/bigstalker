@@ -25,5 +25,9 @@ public class PublicacaoImagemService extends AbstractService<PublicacaoImagem> {
 	public void incluir(PublicacaoImagem entidade) {
 		super.incluir(entidade);
 	}
+	
+	public Integer countImagem() {
+		return publicacaoImagemDAO.countImagem();
+	}
 
 }

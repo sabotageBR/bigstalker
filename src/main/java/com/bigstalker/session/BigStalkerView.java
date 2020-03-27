@@ -8,6 +8,7 @@ import com.ocpsoft.pretty.faces.annotation.URLMappings;
 		  @URLMapping(id = "index", pattern = "/index", viewId = "/index.xhtml"),
 		  @URLMapping(id = "limit", pattern = "/limit", viewId = "/limit.xhtml"),
 		  @URLMapping(id = "home", pattern = "/home", viewId = "/index.xhtml"),
+		  @URLMapping(id = "redirecionar", pattern = "/redirecionar", viewId = "/redirecionar"),
 		  @URLMapping(id = "perfil_list", pattern = "/perfil", viewId = "/pages/perfil/perfil_list.xhtml"),
 		  @URLMapping(id = "perfil_view", pattern = "/perfil/#{usuario}", viewId = "/pages/perfil/perfil_view.xhtml")
 		})

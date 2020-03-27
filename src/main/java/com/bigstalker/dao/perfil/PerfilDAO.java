@@ -25,14 +25,14 @@ public class PerfilDAO extends AbstractDAO<Perfil> {
 		CriteriaQuery<Perfil> criteria = getCriteriaBuilder().createQuery(Perfil.class);
 		Root<Perfil> root = criteria.from(Perfil.class);
 		return getManager().createQuery(criteria.select(root).where(getCriteriaBuilder().equal(root.get("privado"), true))
-				.orderBy(getCriteriaBuilder().desc(root.get("click")))).setMaxResults(20).getResultList();
+				.orderBy(getCriteriaBuilder().desc(root.get("click")))).setMaxResults(25).getResultList();
 	}
 	
 	public List<Perfil> listarTopNota() {
 		CriteriaQuery<Perfil> criteria = getCriteriaBuilder().createQuery(Perfil.class);
 		Root<Perfil> root = criteria.from(Perfil.class);
 		return getManager().createQuery(criteria.select(root).where(getCriteriaBuilder().equal(root.get("privado"), true))
-						.orderBy(getCriteriaBuilder().desc(root.get("notaMedia")))).setMaxResults(20).getResultList();
+						.orderBy(getCriteriaBuilder().desc(root.get("notaMedia")))).setMaxResults(25).getResultList();
 	}
 
 	public Perfil recuperarCompletoPorUsuario(String usuario) {
@@ -71,10 +71,17 @@ public class PerfilDAO extends AbstractDAO<Perfil> {
 			return getManager().createQuery(criteria.select(root)
 					.where(
 							getCriteriaBuilder().or(
-									getCriteriaBuilder().like(getCriteriaBuilder().lower(root.<String>get("nome")), "%"+termo+"%"),
-									getCriteriaBuilder().like(getCriteriaBuilder().lower(root.<String>get("usuario")), "%"+termo+"%"))
+									getCriteriaBuilder().like(getCriteriaBuilder().lower(root.<String>get("nome")), "%"+termo.toLowerCase()+"%"),
+									getCriteriaBuilder().like(getCriteriaBuilder().lower(root.<String>get("usuario")), "%"+termo.toLowerCase()+"%"))
 							)
 					.orderBy(getCriteriaBuilder().desc(root.get("click")))).setMaxResults(20).getResultList();
+	}
+	
+	public Integer countPerfil() {
+		CriteriaQuery<Long> criteria = getCriteriaBuilder().createQuery(Long.class);
+		Root<Perfil> root = criteria.from(Perfil.class);
+		criteria.select(getCriteriaBuilder().count(root));
+		return getManager().createQuery(criteria).getSingleResult().intValue();
 	}
 
 }

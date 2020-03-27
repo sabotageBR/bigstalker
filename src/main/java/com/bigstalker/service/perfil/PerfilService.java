@@ -58,5 +58,9 @@ public class PerfilService extends AbstractService<Perfil> {
 	public List<Perfil> pesquisarPorTermo(String termo) {
 		return perfilDAO.pesquisarPorTermo(termo);
 	}
+	
+	public Integer countPerfil() {
+		return perfilDAO.countPerfil();
+	}
 
 }

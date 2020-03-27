@@ -19,6 +19,13 @@ public class PublicacaoDAO extends AbstractDAO<Publicacao> {
 			return null;
 		}	
 	}
+	
+	public Integer countPublicacao() {
+		CriteriaQuery<Long> criteria = getCriteriaBuilder().createQuery(Long.class);
+		Root<Publicacao> root = criteria.from(Publicacao.class);
+		criteria.select(getCriteriaBuilder().count(root));
+		return getManager().createQuery(criteria).getSingleResult().intValue();
+	}
 
 }
 

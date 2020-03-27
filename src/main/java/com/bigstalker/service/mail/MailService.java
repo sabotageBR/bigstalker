@@ -37,7 +37,7 @@ public class MailService {
 			props.put("mail.smtp.port", "587");
 			Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 				protected PasswordAuthentication getPasswordAuthentication() {
-					return new PasswordAuthentication("helpwstalker@gmail.com", "g34rtkm8");
+					return new PasswordAuthentication("helpwstalker", "g34rtkm8");
 				}
 			});
 			try {
@@ -49,12 +49,11 @@ public class MailService {
 					messageBodyPart.setContent(UtilEmail.corpo
 							.replace("@@TEXTO", texto)
 							.replace("@@SIGLA_EMPRESA", "Big Stalker")
-							.replace("@@TELEFONE", "www.bigstalker.com"),"text/html");
+							.replace("@@TELEFONE", "http://bigstalker.com"),"text/html");
 					
 					Multipart multipart = new MimeMultipart();
 					multipart.addBodyPart(messageBodyPart);
-					messageBodyPart = new MimeBodyPart();
-					multipart.addBodyPart(messageBodyPart);
+					
 					message.setContent(multipart);
 					Transport.send(message);
 					System.out.println(notificacao.getEmailAlerta() +" - Sent message successfully....");

@@ -127,7 +127,7 @@ public class Perfil {
 	}
 	public List<Integer> getListaEstrela(){
 		List<Integer> listaRetorno = new ArrayList<Integer>();
-		for(int i=0;i<=getNotaMedia().intValue();i++) {
+		for(int i=1;i<=getNotaMedia().intValue();i++) {
 			listaRetorno.add(i);
 		}
 		return listaRetorno;

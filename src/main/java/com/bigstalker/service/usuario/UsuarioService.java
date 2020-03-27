@@ -38,7 +38,9 @@ public class UsuarioService extends AbstractService<Usuario> {
 		super.alterar(entidade);
 	}
 	
-	
+	public Integer countUsuario() {
+		return usuarioDAO.countUsuario();
+	}
 	
 
 }

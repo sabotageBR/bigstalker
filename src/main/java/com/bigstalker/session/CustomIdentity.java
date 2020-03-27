@@ -1,6 +1,8 @@
 package com.bigstalker.session;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -18,6 +20,9 @@ public class CustomIdentity implements Serializable {
 	private Usuario usuario;
 	private Instagram4j instagram;
 	private Integer contadorPublico = 0;
+	private Map<String, Integer> mapaVoto;
+	private String urlChallenge;
+	private boolean erroLogin;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -36,6 +41,27 @@ public class CustomIdentity implements Serializable {
 	}
 	public void setContadorPublico(Integer contadorPublico) {
 		this.contadorPublico = contadorPublico;
+	}
+	public Map<String, Integer> getMapaVoto() {
+		if (mapaVoto == null) {
+			mapaVoto = new HashMap<String, Integer>();
+		}
+		return mapaVoto;
+	}
+	public void setMapaVoto(Map<String, Integer> mapaVoto) {
+		this.mapaVoto = mapaVoto;
+	}
+	public String getUrlChallenge() {
+		return urlChallenge;
+	}
+	public void setUrlChallenge(String urlChallenge) {
+		this.urlChallenge = urlChallenge;
+	}
+	public boolean isErroLogin() {
+		return erroLogin;
+	}
+	public void setErroLogin(boolean erroLogin) {
+		this.erroLogin = erroLogin;
 	}
 	
 }

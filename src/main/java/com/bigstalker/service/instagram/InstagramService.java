@@ -47,25 +47,27 @@ public class InstagramService {
 			int i = 0;
 			InstagramSearchUsernameResult userResultFriend = null;
 			InstagramFeedResult feedFriend = null;
-			for (InstagramUserSummary user : users2) {
-				i++;
-				System.out.println("***********************************************");
-			    System.out.println(i+" User " + user.getUsername()+" Privado:"+user.is_private());
-			    try {
-				    userResultFriend = instagram.sendRequest(new InstagramSearchUsernameRequest(user.getUsername()));
-				    Perfil perfil = gravarPerfil(userResultFriend,usuarioLiberacao);
-				    feedFriend = instagram.sendRequest(new InstagramUserFeedRequest(userResultFriend.getUser().getPk()));
-				    if(feedFriend.getItems() != null && feedFriend.getItems().size() > 0) {
-					    for (InstagramFeedItem feedResult : feedFriend.getItems()) {
-					    	gravarPublicacao(userResultFriend, perfil, feedResult);    
+			if(users2 != null) {
+				for (InstagramUserSummary user : users2) {
+					i++;
+					System.out.println("***********************************************");
+				    System.out.println(i+" User " + user.getUsername()+" Privado:"+user.is_private());
+				    try {
+					    userResultFriend = instagram.sendRequest(new InstagramSearchUsernameRequest(user.getUsername()));
+					    Perfil perfil = gravarPerfil(userResultFriend,usuarioLiberacao);
+					    feedFriend = instagram.sendRequest(new InstagramUserFeedRequest(userResultFriend.getUser().getPk()));
+					    if(feedFriend.getItems() != null && feedFriend.getItems().size() > 0) {
+						    for (InstagramFeedItem feedResult : feedFriend.getItems()) {
+						    	gravarPublicacao(userResultFriend, perfil, feedResult);    
+						    }
 					    }
-				    }
-				    Thread.currentThread().sleep(2000);
-			    }catch (Exception e) {
-			    	e.printStackTrace();
-					System.out.println("Erro no login: "+e.getMessage());
-				}    
-			}
+					    Thread.currentThread().sleep(2000);
+				    }catch (Exception e) {
+				    	e.printStackTrace();
+						System.out.println("Erro no login: "+e.getMessage());
+					}    
+				}
+			}	
 			
 		}catch(Exception e){
 			e.printStackTrace();

@@ -19,7 +19,10 @@ public class HttpSecurityConfiguration {
 			.forPath("/home").unprotected()
 			.forPath("/perfil/*").unprotected()
 			.forPath("/limit").unprotected()
+			.forPath("/redirecionar").unprotected()
 			.forPath("/scripts/*").unprotected()
+			.forPath("/images/*").unprotected()
+			
 			.forPath("/").unprotected()
 			.forPath("/index.xhtml").unprotected()
 			.forPath("/index").unprotected()

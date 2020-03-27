@@ -7,10 +7,24 @@
 	template="/WEB-INF/templates/default.xhtml">
 
 	<ui:define name="corpo">
-
+		
+		<ui:fragment rendered="#{customIdentity.urlChallenge ne null and customIdentity.urlChallenge ne ''}">
+			<script>
+				location.href='#{request.contextPath}/redirecionar'
+			
+			</script>
+		</ui:fragment>
 		<h:form method="POST" prependId="false">
 			<div class="page-content header-clear-medium">
+					
 				<div class="content-boxed left-40 right-40">
+					<ui:fragment rendered="#{customIdentity.erroLogin}">
+						<div class="shadow-large alert alert-small alert-round-medium bg-red2-dark">
+							<i class="fa fa-times-circle"></i>
+							<span>#{resources['label.global.errologin']}</span>
+							<i class="fa fa-times"></i>
+						</div>
+					</ui:fragment>
 					<div class="content top-10 bottom-20">
 						<h1 class="center-text uppercase ultrabold fa-3x">Big Stalker</h1>
 						<p
@@ -19,20 +33,22 @@
 						<div class="input-style has-icon input-style-1 input-required">
 							<i class="input-icon fa fa-user font-11"></i> <span>#{resources['label.global.usuario']}</span>
 							<em>(required)</em> 
-							<h:inputText id="j_username"  required="true" label="#{resources['label.global.usuario']}" value="asgatasdebrasilia">
+							<h:inputText id="j_username"  required="true" label="#{resources['label.global.usuario']}">
 								<f:passThroughAttribute name="required" value="required"  />
+								<f:passThroughAttribute name="placeholder" value="#{resources['label.global.entrelogininstagram']}"  />
 							</h:inputText>
 						</div>
 						<div class="input-style has-icon input-style-1 input-required">
 							<i class="input-icon fa fa-lock font-11"></i> <span>#{resources['label.global.senha']}</span>
 							<em>(required)</em> 
-							<h:inputSecret id="j_password" required="true" label="#{resources['label.global.senha']}" redisplay="true" value="g34rtkm8">
+							<h:inputSecret id="j_password" required="true" label="#{resources['label.global.senha']}" redisplay="true">
+								<f:passThroughAttribute name="placeholder" value="#{resources['label.global.senha']}"  />
 								<f:passThroughAttribute name="required" value="required"  />
 							</h:inputSecret>
 						</div>
 						<div class="clear"></div>
 						<div class="divider top-30"></div>
-							<h:commandLink id="login" action="#{identity.login}" 
+							<h:commandLink id="login" action="#{identity.login}"  onclick="$(this).addClass('disabled');" 
 								styleClass="button button-full button-m shadow-large button-round-small bg-highlight top-30 bottom-0">
 								<i class="fab fa-instagram"></i><span class="left-30">#{resources['label.global.logincominstagram']}</span>
 							</h:commandLink>	

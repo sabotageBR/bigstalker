@@ -5,6 +5,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
 import com.bigstalker.dao.AbstractDAO;
+import com.bigstalker.entity.Perfil;
 import com.bigstalker.entity.Usuario;
 
 @Stateless
@@ -20,6 +21,13 @@ public class UsuarioDAO extends AbstractDAO<Usuario> {
 		}catch(Exception e) {
 			return null;
 		}	
+	}
+	
+	public Integer countUsuario() {
+		CriteriaQuery<Long> criteria = getCriteriaBuilder().createQuery(Long.class);
+		Root<Usuario> root = criteria.from(Usuario.class);
+		criteria.select(getCriteriaBuilder().count(root));
+		return getManager().createQuery(criteria).getSingleResult().intValue();
 	}
 
 }

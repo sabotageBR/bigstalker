@@ -76,5 +76,4 @@ public class PerfilTO {
 		this.alertaCriado = alertaCriado;
 	}
 	
-	
 }

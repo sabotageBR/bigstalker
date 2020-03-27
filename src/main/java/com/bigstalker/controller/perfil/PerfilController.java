@@ -41,15 +41,20 @@ public class PerfilController extends AbstractController<PerfilTO> {
 			getTo().getPerfil().setClick(getTo().getPerfil().getClick() + 1);
 			perfilService.alterar(getTo().getPerfil());
 			getTo().setAlertaCriado(false);
+			System.out.println("********* Visualizou o perfil: "+getRequest().getParameter("usuario"));
 		}	
 	}
 	
 	
 	public void pesquisar() {
+		
 		getTo().setAlertaCriado(false);
 		if(getTo().getPerfilPesquisa().getNome() != null && !getTo().getPerfilPesquisa().getNome().equals("") && getTo().getPerfilPesquisa().getNome().length() > 1) {
 			getTo().setPerfis(perfilService.pesquisarPorTermo(getTo().getPerfilPesquisa().getNome()));
-		}	
+		}
+		System.out.println("Pesquisou pelo termo:"+getTo().getPerfilPesquisa().getNome());
+		System.out.println("Tamanho:"+getTo().getPerfis().size());
+		System.out.println("**********************************");
 	}
 	
 	public void encontrarEntreAmigos() {
@@ -58,21 +63,39 @@ public class PerfilController extends AbstractController<PerfilTO> {
 	}
 	
 	public void criarAlerta() {
-		getTo().getNotificacao().setAlertado(false);
-		getTo().getNotificacao().setDataCriacao(new Date());
-		getTo().getNotificacao().setUsuarioNaoEncontrado(getTo().getPerfilPesquisa().getNome());
-		notificacaoService.incluir(getTo().getNotificacao());
-		getTo().setPerfilPesquisa(null);
-		getTo().setPerfis(null);
-		getTo().setAlertaCriado(true);
+		if(getTo().getNotificacao().getEmailAlerta() != null && !getTo().getNotificacao().getEmailAlerta().equals("")) {
+			getTo().getNotificacao().setAlertado(false);
+			getTo().getNotificacao().setDataCriacao(new Date());
+			getTo().getNotificacao().setUsuarioNaoEncontrado(getTo().getPerfilPesquisa().getNome());
+			notificacaoService.incluir(getTo().getNotificacao());
+			getTo().setPerfilPesquisa(null);
+			getTo().setPerfis(null);
+			getTo().setAlertaCriado(true);
+			getTo().setNotificacao(null);
+		}else {
+			String mensagem = getMessage("label.global.emailobrigatorio");
+			getFacesContext().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, mensagem, mensagem));
+		}	
 	}
 	
 	public List<Integer> getListaEstrelaMediaPerfil(){
 		List<Integer> retorno = new ArrayList<Integer>();
-		for(int i=0;i<=getTo().getPerfil().getNotaMedia().intValue();i++) {
+		for(int i=1;i<=getTo().getPerfil().getNotaMedia().intValue();i++) {
 			retorno.add(i);
 		}
 		return retorno;
+	}
+	
+	public void votar(Integer voto) {
+		getTo().getPerfil().setQtdVoto(getTo().getPerfil().getQtdVoto() + 1);
+		getTo().getPerfil().setNotaTotal(getTo().getPerfil().getNotaTotal() + voto);
+		getTo().getPerfil().setNotaMedia(getTo().getPerfil().getNotaTotal() / getTo().getPerfil().getQtdVoto());
+		perfilService.alterar(getTo().getPerfil());
+		customIdentity.getMapaVoto().put(getTo().getPerfil().getUsuario(),voto);
+	}
+	
+	public boolean isVotou() {
+		return customIdentity.getMapaVoto().get(getTo().getPerfil().getUsuario()) != null;
 	}
 	
 }
