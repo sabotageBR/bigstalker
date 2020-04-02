@@ -23,6 +23,7 @@ public class CustomIdentity implements Serializable {
 	private Map<String, Integer> mapaVoto;
 	private String urlChallenge;
 	private boolean erroLogin;
+	private boolean challenge = false;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -62,6 +63,12 @@ public class CustomIdentity implements Serializable {
 	}
 	public void setErroLogin(boolean erroLogin) {
 		this.erroLogin = erroLogin;
+	}
+	public boolean isChallenge() {
+		return challenge;
+	}
+	public void setChallenge(boolean challenge) {
+		this.challenge = challenge;
 	}
 	
 }

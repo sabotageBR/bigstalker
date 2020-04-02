@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import org.apache.log4j.LogManager;
 import org.brunocvcunha.instagram4j.Instagram4j;
+import org.brunocvcunha.instagram4j.requests.payload.InstagramChallenge;
 import org.brunocvcunha.instagram4j.requests.payload.InstagramLoginResult;
 import org.picketlink.Identity;
 import org.picketlink.annotations.PicketLink;
@@ -35,12 +36,19 @@ public class SimpleAuthenticator extends BaseAuthenticator {
 		System.out.println(credentials.getUserId());
 		System.out.println(credentials.getPassword());
 		try {
-			Instagram4j instagram = Instagram4j.builder().username(credentials.getUserId()).password(credentials.getPassword()).build();
-			instagram.setup();
-			
+			Instagram4j instagram = null;
+			if(!customIdentity.isChallenge()) {
+				instagram = Instagram4j.builder().username(credentials.getUserId()).password(credentials.getPassword()).build();
+				instagram.setup();
+			}else {
+				instagram = customIdentity.getInstagram();
+			}
 			InstagramLoginResult retorno =  instagram.login();
 			if(retorno.getChallenge() != null && retorno.getChallenge().getUrl() != null) {
 				customIdentity.setUrlChallenge(retorno.getChallenge().getUrl());
+				customIdentity.setChallenge(true);
+				customIdentity.setInstagram(instagram);
+				
 			}
 			if(!retorno.getStatus().equals("fail")) {
 				Usuario usuario = usuarioService.recuperarPorUsuario(retorno.getLogged_in_user().getUsername());
