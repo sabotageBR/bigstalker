@@ -25,6 +25,8 @@ import com.bigstalker.to.PerfilTO;
 public class PerfilController extends AbstractController<PerfilTO> {
 
 	
+	private static final long serialVersionUID = 8799666236109984333L;
+	
 	private @Inject PerfilService perfilService;
 	private @Inject CustomIdentity customIdentity;
 	private @Inject InstagramService instagramService;

@@ -2,10 +2,12 @@ package com.bigstalker.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.application.FacesMessage.Severity;
@@ -20,8 +22,11 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
-public class AbstractController<TO> {
+public class AbstractController<TO> implements Serializable{
 
+	
+	
+	private static final long serialVersionUID = -3453318321286425010L;
 	
 	private TO to;
 	
@@ -126,5 +131,9 @@ public class AbstractController<TO> {
 			return to;
 		}	
 		return to;
+	}
+	
+	public static void main(String[] args) {
+		System.out.println(UUID.randomUUID());
 	}
 }

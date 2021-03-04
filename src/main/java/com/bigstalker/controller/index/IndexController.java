@@ -20,6 +20,7 @@ import com.bigstalker.to.IndexTO;
 @RequestScoped
 public class IndexController extends AbstractController<IndexTO> {
 
+	private static final long serialVersionUID = 1536609066580603684L;
 	
 	private @Inject PerfilService perfilService;
 	private @Inject UsuarioService usuarioService;

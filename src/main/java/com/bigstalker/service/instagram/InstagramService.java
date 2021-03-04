@@ -61,7 +61,7 @@ public class InstagramService {
 						    	gravarPublicacao(userResultFriend, perfil, feedResult);    
 						    }
 					    }
-					    Thread.currentThread().sleep(2000);
+					    Thread.currentThread().sleep(5000);
 				    }catch (Exception e) {
 				    	e.printStackTrace();
 						System.out.println("Erro no login: "+e.getMessage());
